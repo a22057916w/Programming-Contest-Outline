@@ -18,6 +18,7 @@ int main() {
     int len = 0;
     int pos = 0;
     ans[len++] = 0;
+    
     // first, we use all the three-stop tickets
     // second, we use the remaining one-stop and two-stop tickets
     // we have three different startegies for using the all three-stop tickets

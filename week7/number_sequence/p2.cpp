@@ -61,9 +61,9 @@ int main() {
     int pos;
     cin >> pos;
 
-    // peform binary search to get group where the target falls in;
+    // perform binary search to get group where the target falls in;
     int g = binary_search(pos);
-    int ans = tot[g] - tot[g - 1]
+    int ans = tot[g] - tot[g - 1];
   }
 
 }
