@@ -2,14 +2,15 @@
 #include <cmath>
 #include <string>
 #include <sstream>
+#include <cstdint>
 using namespace std;
 
 const int maxn = 40010;
-long long int dig[maxn];
-long long int count[maxn];
-long long int tot[maxn];
+int64_t dig[maxn];
+int64_t count[maxn];
+int64_t tot[maxn];
 
-long long int countDigit(int n) {
+int64_t countDigit(int n) {
   return floor(log10(n) + 1);
 }
 
@@ -32,13 +33,13 @@ void init() {
 }
 
 
+// customized binary_search
+int64_t binary_search(int target) {
 
-long long int binary_search(int target) {
-
-  long long int left = 1, right = maxn - 1;
+  int64_t left = 1, right = maxn - 1;
   while(left < right) {
 
-    long long int middle = (right + left) >> 1;
+    int64_t middle = (right + left) >> 1;
 
     if(tot[middle] == target)
       return middle;
@@ -46,7 +47,6 @@ long long int binary_search(int target) {
       right = middle;
     else
       left = middle + 1;
-    //cout << left << " " << middle << " " << right << endl;
   }
 
   return left;
@@ -63,19 +63,20 @@ int main() {
   cin >> testcase;
 
   while(testcase--) {
-    long long int pos;
+    int64_t pos;
     cin >> pos;
 
     // perform binary search to get group where the target falls in;
-    long long int g = binary_search(pos);
+    int64_t g = binary_search(pos);
     // the k digits(target) in group g
-    long long int k = pos - tot[g - 1];
-    // the total digits in group g
-    long long int tg_ditgits = count[g];
-    //cout << g << " " << k << " " << tg_ditgits << endl;
-    // find the target number
+    int64_t k = pos - tot[g - 1];
+
+    // to record the target number and the remaining digits and
+    // to calculate the increasing sum of digits when perform loop
     int num, remain;
-    long long int sum = 0;
+    int64_t sum = 0;
+
+    // sum up the digits from No.1 to No.g to find the target number
     for(int i = 1; i <= g; i++) {
       sum += dig[i];
       if(sum >= k) {
@@ -84,7 +85,9 @@ int main() {
         break;
       }
     }
-    //cout << num << " " << remain << endl;
+
+    // perform convertion of integer-to-string using c++11 <sstream> and <string> libs,
+    // then print the answer
     ostringstream ss;
     ss << num;
     cout << ss.str()[(dig[num] - 1) - remain] << endl;
