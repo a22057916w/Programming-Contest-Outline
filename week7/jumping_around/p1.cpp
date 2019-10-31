@@ -18,7 +18,7 @@ int main() {
     int len = 0;
     int pos = 0;
     ans[len++] = 0;
-    
+
     // first, we use all the three-stop tickets
     // second, we use the remaining one-stop and two-stop tickets
     // we have three different startegies for using the all three-stop tickets
@@ -67,16 +67,16 @@ int main() {
         ans[len++] = (pos += 3);
     }
 
-    // we use all the one-stop tickets except for one to turn around
+    // use all the one-stop tickets except for one to turn around
     while(a-- > 1)
       ans[len++] = ++pos;
 
-    // now, we use all the two-stop tickets and one-stop ticket to turn around
+    // now, we use half of the two-stop tickets and leave a one-stop ticket to turn around
     for(int i = 0; i < (b + 1) / 2; i++)
       ans[len++] = (pos+= 2);
 
-    // there are two startegies to use the tickets
-    // depending on if two-stop tickets are even or odd
+    // there are two startegies to use the remaining two-stop tickets,
+    // depending on wether the total two-stop tickets are even or odd
     if(b % 2)
       ans[len++] = --pos;
     else
