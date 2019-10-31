@@ -1,13 +1,19 @@
 #include <iostream>
 #include <cmath>
+#include <string>
+#include <sstream>
 using namespace std;
 
 const int maxn = 40010;
-int dig[maxn];
-int count[maxn];
-int tot[maxn];
+long long int dig[maxn];
+long long int count[maxn];
+long long int tot[maxn];
 
-int init() {
+long long int countDigit(int n) {
+  return floor(log10(n) + 1);
+}
+
+void init() {
 
   // recording the digit for each number
   dig[0] = 1;
@@ -25,16 +31,14 @@ int init() {
     tot[i] = tot[i - 1] + count[i];
 }
 
-int countDigit(int n) {
-  return floor(log10(n) + 1);
-}
 
-int binary_search(int target) {
 
-  int left = 1, right = maxn - 1;
-  while(left <= right) {
+long long int binary_search(int target) {
 
-    int middle = (right + left) >> 2;
+  long long int left = 1, right = maxn - 1;
+  while(left < right) {
+
+    long long int middle = (right + left) >> 1;
 
     if(tot[middle] == target)
       return middle;
@@ -42,6 +46,7 @@ int binary_search(int target) {
       right = middle;
     else
       left = middle + 1;
+    //cout << left << " " << middle << " " << right << endl;
   }
 
   return left;
@@ -58,12 +63,31 @@ int main() {
   cin >> testcase;
 
   while(testcase--) {
-    int pos;
+    long long int pos;
     cin >> pos;
 
     // perform binary search to get group where the target falls in;
-    int g = binary_search(pos);
-    int ans = tot[g] - tot[g - 1];
+    long long int g = binary_search(pos);
+    // the k digits(target) in group g
+    long long int k = pos - tot[g - 1];
+    // the total digits in group g
+    long long int tg_ditgits = count[g];
+    //cout << g << " " << k << " " << tg_ditgits << endl;
+    // find the target number
+    int num, remain;
+    long long int sum = 0;
+    for(int i = 1; i <= g; i++) {
+      sum += dig[i];
+      if(sum >= k) {
+        remain = sum - k;
+        num = i;
+        break;
+      }
+    }
+    //cout << num << " " << remain << endl;
+    ostringstream ss;
+    ss << num;
+    cout << ss.str()[(dig[num] - 1) - remain] << endl;
   }
 
 }
