@@ -23,14 +23,14 @@ void init(int n) {
   len[pos] = 1;
   col[pos] = box[0];
 
-  int prev = box[0];
+  int curr = box[0];  // record the current color
   for(int i = 1; i < n; i++) {
-    if(box[i] == prev)
+    if(box[i] == curr)
       len[pos]++;
     else {
       len[++pos] = 1;
       col[pos] = box[i];
-      prev = box[i];
+      curr = box[i];
     }
   }
 
