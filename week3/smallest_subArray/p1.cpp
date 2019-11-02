@@ -54,7 +54,7 @@ int main() {
           break;
 
         cnt[a[rear]]++;
-        // check if the condition is reached, that at least has one number from 1 to k
+        // check if the condition is reached, that there ia at least one number from figure 1 to k
         if(cnt[a[rear]] == 1 && a[rear] <= k)
           c++;
         if(c == k)
