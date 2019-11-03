@@ -16,6 +16,8 @@ int main() {
     for(int i = 0; i < n; i++)
       cin >> a[i];
 
+    // if n and 逆序數 are both odd
+    // then the outcome is impossible
     int cnt = 0; // 存逆序數
     for(int i = 0; i < n; i++)
       for(int j = i + 1; j < n; j++)
