@@ -2,6 +2,8 @@
 using namespace std;
 
 const int maxn = 1120;
+
+// the following params are used to store the prime number
 bool visit[maxn + 10] = {false};
 int prime[maxn + 10];
 int prime_cnt = 0;
@@ -21,9 +23,11 @@ int main() {
 
   init_prime_table();
 
-  // peeform DP
+  // perform DP
+  // for example, we need to consider [5 - 3(prime)][2 - 1] for [5][2]
   dp[0][0] = 1;
   for(int i = 0; i < prime_cnt; i++)
+    // build the dp reversely so that will be no duplicate pair like (2, 3), (3, 2)
     for(int j = maxn; j >= prime[i]; j--)
       for(int k = 1; k < 15; k++)
         dp[j][k] += dp[j - prime[i]][k - 1];
