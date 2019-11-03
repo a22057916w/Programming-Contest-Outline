@@ -24,6 +24,7 @@ int main() {
         if(a[i] > a[j])
           cnt++;
 
+    // print out the answer
     if(cnt % 2 && n % 2)
       cout << "impossible" << endl;
     else
