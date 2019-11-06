@@ -48,7 +48,7 @@ int DP(int l, int r, int k) {
     return dp[l][r][k];
 
   // find the maximum socre of interval [l, r - 1] plus the score of interval [r, k]
-  // because three might be the same color in the interval [r, k] after merge
+  // because there might be the same color in the interval [r, k] after merge
   int ret = DP(l, r - 1, 0) + (len[r] + k) * (len[r] + k);
 
   // there might be the same color in the interval [l, r] after merge,
